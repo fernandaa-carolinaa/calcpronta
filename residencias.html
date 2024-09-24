@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Unidade Consumidora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f6fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #174779;
+            font-weight: 500;
+        }
+        .section-title {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #174779;
+        }
+        .btn-outline-success {
+            color: #174779;
+            border-color: #174779;
+        }
+        .btn-outline-success:hover {
+            background-color: #174779;
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #174779;
+            border: none;
+            font-size: 0.875rem;
+            padding: 8px 16px;
+        }
+        .btn-primary:hover {
+            background-color: #0f3b6d;
+        }
+        .card {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        table th {
+            background-color: #f8f9fa;
+        }
+        .modal-header {
+            background-color: #174779;
+            color: white;
+        }
+        .modal-footer .btn {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="header">
+            <h1><i class="bi bi-list-task icon"></i> Gerenciar Unidade Consumidora</h1>
+        </div>
+
+        <section class="mb-4">
+            <h2 class="section-title">Listar Unidades Consumidoras</h2>
+            <button class="btn btn-primary" onclick="showAddForm()">
+                <i class="bi bi-plus-circle"></i> Adicionar Unidade Consumidora
+            </button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="unidadesList">
+                    <!-- Unidades consumidoras serão geradas dinamicamente -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="unidadeForm" class="card d-none">
+            <div class="card-header">
+                <h2 id="formTitle">Cadastrar nova Unidade Consumidora</h2>
+            </div>
+            <div class="card-body">
+                <form id="unidadeFormElement">
+                    <input type="hidden" id="unidadeId">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipoId" class="form-label">Tipo</label>
+                        <select class="form-select" id="tipoId" required>
+                            <option value="">Selecione o Tipo</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Salvar
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
