@@ -14,12 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
 function fetchUnidadesConsumidorasSelect() {
     fetch('http://localhost:8000/unidades-consumidoras')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const unidadeConsumidoraSelect = document.getElementById('unidadeConsumidoraSelect');
             unidadeConsumidoraSelect.innerHTML = '';
             data.unidades_consumidoras.forEach(unidade => {
@@ -37,7 +35,6 @@ function fetchDependencias() {
     fetch(`http://localhost:8000/dependencias/unidade-consumidora/${unidadeConsumidoraId}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const dependenciasList = document.getElementById('dependenciasList');
             dependenciasList.innerHTML = '';
             data.dependencias.forEach(dependencia => {
@@ -50,7 +47,6 @@ function fetchDependencias() {
                             <button class="btn btn-danger" onclick="deleteDependencia(${dependencia.id})"><i class="bi bi-trash"></i> Deletar</button>
                             <button class="btn btn-info" onclick="redirectToGerenciarDispositivos(${dependencia.id}, ${unidadeConsumidoraId})">Gerenciar Dispositivos</button>
                         </td>
-
                     </tr>`;
             });
         })
@@ -61,17 +57,18 @@ function redirectToGerenciarDispositivos(dependenciaId, unidadeConsumidoraId) {
     window.location.href = `dispositivos.html?dependenciaId=${dependenciaId}&unidadeConsumidoraId=${unidadeConsumidoraId}`;
 }
 
-
 function showAddDependenciaForm() {
     document.getElementById('dependenciaId').value = '';
     document.getElementById('nome').value = '';
-    document.getElementById('addModal').style.display = 'block'; 
+    const modal = new bootstrap.Modal(document.getElementById('addModal'));
+    modal.show();
 }
 
 function showUpdateDependenciaForm(id, nome) {
     document.getElementById('dependenciaId').value = id;
     document.getElementById('nome').value = nome;
-    document.getElementById('addModal').style.display = 'block';
+    const modal = new bootstrap.Modal(document.getElementById('addModal'));
+    modal.show();
 }
 
 function saveDependencia(type) {
@@ -92,9 +89,9 @@ function saveDependencia(type) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         fetchDependencias();
-        document.getElementById('addModal').style.display = 'none';
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addModal'));
+        modal.hide();
     })
     .catch(error => console.error(`Erro ao ${type === 'add' ? 'adicionar' : 'atualizar'} dependência:`, error));
 }
@@ -105,12 +102,7 @@ function deleteDependencia(id) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         fetchDependencias();
     })
     .catch(error => console.error('Erro ao deletar dependência:', error));
-}
-
-document.getElementById('closeModal').onclick = function() {
-    document.getElementById('addModal').style.display = 'none'; 
 }
